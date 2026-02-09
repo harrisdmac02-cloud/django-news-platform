@@ -6,8 +6,11 @@ from .models import Article, Publisher, CustomUser
 
 class MinimalUserSerializer(serializers.ModelSerializer):
     """
-    Minimal representation of a CustomUser, used as nested serializer
-    for author fields in article serializers.
+    Lightweight serializer for CustomUser model.
+
+    Used as a nested serializer to represent article authors
+    with minimal information (avoiding exposure of sensitive fields
+    like email, date_joined, etc.).
     """
 
     class Meta:
@@ -17,8 +20,10 @@ class MinimalUserSerializer(serializers.ModelSerializer):
 
 class PublisherSerializer(serializers.ModelSerializer):
     """
-    Serializer for Publisher model, exposing basic public information.
-    Used as nested field in article serializers.
+    Serializer for the Publisher model.
+
+    Provides basic public-facing information about a publisher.
+    Used as a nested serializer within article representations.
     """
 
     class Meta:
@@ -28,10 +33,18 @@ class PublisherSerializer(serializers.ModelSerializer):
 
 class ArticleListSerializer(serializers.ModelSerializer):
     """
-    Serializer for listing articles (summary view).
+    Serializer for article list views and summary representations.
 
-    Includes nested author and publisher data, but excludes full content.
-    Intended for list views, feeds, and search results.
+    Designed for:
+    - List endpoints
+    - Feed views
+    - Search results
+    - Any view where full article content is not needed
+
+    Features:
+    - Includes nested representations of author and publisher
+    - Excludes full body/content field for performance
+    - Optimized for pagination and quick rendering
     """
 
     author = MinimalUserSerializer(read_only=True)
