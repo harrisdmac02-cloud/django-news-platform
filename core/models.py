@@ -9,15 +9,20 @@ from django.utils.text import slugify
 
 class CustomUser(AbstractUser):
     """
-    Custom user model extending Django's AbstractUser with role-based properties
-    and additional profile fields.
+    Custom user model that extends Django's AbstractUser.
 
-    Users are assigned to exactly one primary role group: Reader, Journalist, or Editor.
-    Role checks are done via properties (`is_reader`, `is_journalist`, `is_editor`).
+    Supports three mutually exclusive primary roles via groups:
+    • Reader
+    • Journalist
+    • Editor
 
-    Relationships:
-        - Readers can follow journalists (subscribed_journalists)
-        - Journalists have followers (journalist_followers)
+    Additional functionality:
+    - Profile fields (bio, profile picture)
+    - Reader ↔ Journalist subscription/follow relationship
+    - Convenience properties to check role membership
+
+    Note: A user should belong to exactly one of the three role groups.
+    The application logic is expected to enforce this constraint.
     """
 
     bio = models.TextField(blank=True, null=True)
@@ -48,14 +53,18 @@ class CustomUser(AbstractUser):
 
 class Publisher(models.Model):
     """
-    Represents a news publisher organization.
+    Represents a news organization / media outlet / publisher.
 
-    Publishers can have:
-      - Editors who manage content approval
-      - Journalists affiliated with them
-      - Readers who subscribe to their articles
+    Publishers serve as:
+    • Organizational grouping for articles
+    • Affiliation entity for journalists
+    • Management entity for editors
+    • Subscription target for readers
 
-    Used for grouping articles and managing subscription-based access.
+    Relationships:
+    - Many editors can manage one publisher
+    - Many journalists can be affiliated with one publisher
+    - Many readers can subscribe to updates from one publisher
     """
 
     name = models.CharField(max_length=200, unique=True)
@@ -131,14 +140,24 @@ class Newsletter(models.Model):
 
 class Article(models.Model):
     """
-    Core content model representing news articles.
+    Core news article model with complete editorial workflow support.
 
-    Supports multiple statuses: draft → pending → approved/rejected → published.
-    Articles can be:
-      - Independent (publisher is NULL)
-      - Published under a specific Publisher
+    Workflow states:
+        draft → pending → approved / rejected → published
 
-    Includes editor approval tracking, notification flag, and image support.
+    Features:
+    • Optional association with a Publisher
+    • Journalist-only authorship
+    • Editor approval tracking
+    • Auto-generated unique slugs
+    • Lead image support
+    • Category tagging
+    • Notification control flag
+
+    Business rules:
+    - Only users in the 'Journalist' group can be authors
+    - Only users in the 'Editor' group can approve articles
+    - Published articles should have published_at timestamp
     """
 
     STATUS_CHOICES = (
