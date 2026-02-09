@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Articles – News Platform{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
+        <h1 class="fw-bold mb-0">{{ page_title|default:"Latest Articles" }}</h1>
+        {% if show_search %}
+            <form class="d-flex" method="get">
+                <input class="form-control me-2 rounded-pill" type="search" name="q" placeholder="Search articles..." aria-label="Search">
+                <button class="btn btn-outline-primary rounded-pill px-4" type="submit">Search</button>
+            </form>
+        {% endif %}
+    </div>
+
+    {% if articles %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for article in articles %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                        {% if article.lead_image %}
+                            <img src="{{ article.lead_image.image.url }}"
+                                 class="card-img-top"
+                                 alt="{{ article.title }}"
+                                 style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 200px; font-size: 3rem; color: #dee2e6;">
+                                {{ article.title|slice:":1" }}
+                            </div>
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-semibold">
+                                <a href="{{ article.get_absolute_url }}" class="text-dark text-decoration-none stretched-link">
+                                    {{ article.title }}
+                                </a>
+                            </h5>
+                            <p class="text-muted small mt-2 mb-3">
+                                By {{ article.author.get_full_name|default:article.author.username }}
+                                {% if article.publisher %} • {{ article.publisher.name }}{% endif %}
+                            </p>
+                            <p class="text-secondary flex-grow-1">
+                                {{ article.excerpt|truncatewords:32|default:"..." }}
+                            </p>
+                            <div class="mt-auto pt-3">
+                                <small class="text-muted">
+                                    {{ article.published_at|date:"d M Y" }}
+                                </small>
+                                {% if article.status != 'published' %}
+                                    <span class="badge bg-warning ms-2">
+                                        {{ article.get_status_display }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination (if paginated) -->
+        {% if is_paginated %}
+            <nav aria-label="Page navigation" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link rounded-pill px-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                            <a class="page-link rounded-pill px-4" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link rounded-pill px-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
+
+    {% else %}
+        <div class="alert alert-light text-center py-5 rounded-4">
+            <h4 class="text-muted mb-3">No articles found</h4>
+            <p class="lead text-secondary mb-4">
+                {% if is_paginated %}Try another page{% else %}Check back later or explore other sections{% endif %}
+            </p>
+            <a href="{% url 'core:home' %}" class="btn btn-outline-primary rounded-pill px-4">
+                Back to Home
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

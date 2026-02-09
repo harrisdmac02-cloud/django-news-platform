@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Journalist Dashboard – News Platform{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <h1 class="fw-bold mb-4 text-center">Journalist Dashboard</h1>
+    <p class="lead text-muted text-center mb-5">Your content overview and stats</p>
+
+    <div class="row g-4 mb-5">
+
+        <!-- Stats cards -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4 h-100">
+                <h5 class="mb-3 text-muted">Published Articles</h5>
+                <div class="display-5 fw-bold text-success">
+                    {{ published_count|default:0 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4 h-100">
+                <h5 class="mb-3 text-muted">Pending Review</h5>
+                <div class="display-5 fw-bold text-warning">
+                    {{ pending_count|default:0 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4 h-100">
+                <h5 class="mb-3 text-muted">Drafts</h5>
+                <div class="display-5 fw-bold text-secondary">
+                    {{ draft_count|default:0 }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recent articles -->
+    <div class="mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-semibold m-0">Your Recent Articles</h4>
+            <a href="{% url 'core:article_create' %}" class="btn btn-primary rounded-pill">
+                + New Article
+            </a>
+        </div>
+
+        {% if recent_articles %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for article in recent_articles %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-4">
+                            <div class="card-body">
+                                <h6 class="card-title fw-semibold">
+                                    <a href="{{ article.get_absolute_url }}" class="text-dark text-decoration-none">
+                                        {{ article.title|truncatewords:9 }}
+                                    </a>
+                                </h6>
+                                <div class="small text-muted mt-2">
+                                    <span class="badge bg-{% if article.status == 'published' %}success{% elif article.status == 'pending' %}warning{% else %}secondary{% endif %}">
+                                        {{ article.get_status_display }}
+                                    </span>
+                                    • {{ article.created_at|date:"d M Y" }}
+                                </div>
+                                <p class="text-secondary small mt-3">
+                                    {{ article.excerpt|truncatewords:30|default:"..." }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-light text-center py-5 rounded-4">
+                <p class="lead text-muted mb-3">No articles yet</p>
+                <a href="{% url 'core:article_create' %}" class="btn btn-primary rounded-pill">
+                    Write Your First Article
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

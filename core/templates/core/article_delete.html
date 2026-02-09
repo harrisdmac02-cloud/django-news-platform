@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Article – News Platform{% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-7">
+
+            <div class="card shadow-sm border-0 rounded-4 mt-5 text-center p-5">
+                <div class="py-4">
+
+                    <h2 class="fw-bold text-danger mb-4">Delete Article</h2>
+
+                    <p class="lead mb-4">
+                        Are you sure you want to permanently delete this article?
+                    </p>
+
+                    <div class="bg-light rounded-3 p-4 mb-5 mx-auto" style="max-width: 500px;">
+                        <h5 class="fw-medium mb-3">{{ article.title }}</h5>
+                        <p class="text-muted small mb-2">
+                            By {{ article.author.get_full_name|default:article.author.username }}
+                            {% if article.publisher %} • {{ article.publisher.name }}{% endif %}
+                        </p>
+                        <p class="text-secondary">
+                            {{ article.excerpt|truncatewords:40|default:"No excerpt" }}
+                        </p>
+                    </div>
+
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg rounded-pill px-5 py-3 fw-medium">
+                            Yes, Delete Permanently
+                        </button>
+                    </form>
+
+                    <a href="{{ article.get_absolute_url }}"
+                       class="btn btn-outline-secondary btn-lg rounded-pill px-5 py-3 ms-3 fw-medium">
+                        Cancel – Keep Article
+                    </a>
+
+                    <p class="text-muted small mt-5">
+                        This action cannot be undone.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

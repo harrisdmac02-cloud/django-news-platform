@@ -1,0 +1,81 @@
+{% extends "core/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Subscribe to {{ publisher.name }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+      <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold mb-3">
+          {% if already_subscribed or subscribed_success %}
+            <i class="bi bi-check-circle-fill text-success me-3"></i>
+            You're subscribed!
+          {% else %}
+            <i class="bi bi-bell-fill text-primary me-3"></i>
+            Subscribe to {{ publisher.name }}
+          {% endif %}
+        </h1>
+      </div>
+
+      <div class="card shadow border-0">
+        <div class="card-body text-center p-5">
+
+          {% if subscribed_success %}
+            <div class="mb-4">
+              <h4 class="mb-4">Thank you!</h4>
+              <p class="lead text-muted mb-4">
+                You are now receiving articles from <strong>{{ publisher.name }}</strong> in your personal feed.
+              </p>
+              <p class="text-muted">
+                You'll be notified about their newest published articles.
+              </p>
+            </div>
+          {% elif already_subscribed %}
+            <div class="mb-4">
+              <h4 class="mb-4">Already subscribed</h4>
+              <p class="lead text-muted">
+                You are already following <strong>{{ publisher.name }}</strong>.
+              </p>
+            </div>
+          {% else %}
+            <p class="lead mb-4">
+              Get all new articles from <strong>{{ publisher.name }}</strong> directly in your feed.
+            </p>
+
+            <form method="post" class="my-4">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ next|default:request.GET.next|default:'/' }}">
+
+              <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                <i class="bi bi-plus-circle me-2"></i>
+                Subscribe to {{ publisher.name }}
+              </button>
+            </form>
+
+            <p class="text-muted small mt-4">
+              You can manage or cancel this subscription anytime from your
+              <a href="{% url 'core:subscriptions' %}">Subscriptions page</a>.
+            </p>
+          {% endif %}
+
+        </div>
+
+        <div class="card-footer bg-light text-center py-4">
+          <a href="{% url 'core:publisher_articles' publisher.pk %}" class="btn btn-outline-secondary px-4">
+            ← Back to articles
+          </a>
+          {% if subscribed_success or already_subscribed %}
+            <a href="{% url 'core:my-feed' %}" class="btn btn-outline-primary ms-3 px-4">
+              Go to my feed →
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

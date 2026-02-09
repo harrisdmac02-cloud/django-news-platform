@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - News Platform{% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            <div class="card shadow-sm border-0 mt-4">
+                <div class="card-body p-5 text-center">
+
+                    {% if user.profile_picture %}
+                        <img src="{{ user.profile_picture.url }}"
+                             alt="{{ user.get_full_name|default:user.username }}"
+                             class="rounded-circle mb-4"
+                             style="width: 140px; height: 140px; object-fit: cover; border: 4px solid #e9ecef;">
+                    {% else %}
+                        <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-4"
+                             style="width: 140px; height: 140px; font-size: 3.5rem; color: #6c757d;">
+                            {{ user.get_full_name|slice:":1"|upper|default:user.username|slice:":1"|upper }}
+                        </div>
+                    {% endif %}
+
+                    <h2 class="mb-2">{{ user.get_full_name|default:user.username }}</h2>
+
+                    <div class="mb-4">
+                        <span class="badge bg-primary fs-6 px-4 py-2">
+                            {% if user.is_reader %}Reader{% elif user.is_journalist %}Journalist{% elif user.is_editor %}Editor{% else %}User{% endif %}
+                        </span>
+                    </div>
+
+                    {% if user.bio %}
+                        <p class="lead text-muted mb-4">{{ user.bio|linebreaksbr }}</p>
+                    {% else %}
+                        <p class="text-muted mb-4">No bio added yet.</p>
+                    {% endif %}
+
+                    <div class="row g-4 mt-4">
+                        <div class="col-6 col-md-4">
+                            <div class="border rounded p-3 bg-light">
+                                <h5 class="mb-1">{{ user.date_joined|date:"d M Y" }}</h5>
+                                <small class="text-muted">Member since</small>
+                            </div>
+                        </div>
+                        {% if user.is_journalist %}
+                            <div class="col-6 col-md-4">
+                                <div class="border rounded p-3 bg-light">
+                                    <h5 class="mb-1">{{ article_count|default:0 }}</h5>
+                                    <small class="text-muted">Articles</small>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if user.is_reader %}
+                            <div class="col-6 col-md-4">
+                                <div class="border rounded p-3 bg-light">
+                                    <h5 class="mb-1">{{ subscribed_count|default:0 }}</h5>
+                                    <small class="text-muted">Subscriptions</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="border rounded p-3 bg-light">
+                                    <h5 class="mb-1">{{ followed_count|default:0 }}</h5>
+                                    <small class="text-muted">Following</small>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mt-5">
+                        <a href="#" class="btn btn-outline-secondary px-4">Edit Profile</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

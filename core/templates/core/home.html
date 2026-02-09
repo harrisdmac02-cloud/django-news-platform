@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}News Platform{% endblock %}
+
+{% block content %}
+
+    <header class="text-center py-5 mb-5 bg-white rounded-4 shadow-sm">
+        <h1 class="display-5 fw-bold mb-3">Latest Stories</h1>
+        <p class="lead text-muted">Quality journalism from independent voices and trusted publishers</p>
+    </header>
+
+    {% if featured_articles %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for article in featured_articles %}
+                <div class="col">
+                    <div class="card h-100">
+                        {% if article.lead_image %}
+                            <img src="{{ article.lead_image.image.url }}"
+                                 class="card-img-top"
+                                 alt="{{ article.lead_image.alt_text|default:article.title }}"
+                                 style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-light d-flex align-items-center justify-content-center"
+                                 style="height: 200px; font-size: 3rem; color: #dee2e6;">
+                                {{ article.title|slice:":1" }}
+                            </div>
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="article-title fw-semibold">
+                                <a href="{{ article.get_absolute_url }}" class="text-dark text-decoration-none stretched-link">
+                                    {{ article.title }}
+                                </a>
+                            </h5>
+                            <p class="text-muted small mt-2 mb-3">
+                                {{ article.author.get_full_name|default:article.author.username }}
+                                {% if article.publisher %} • {{ article.publisher.name }}{% endif %}
+                            </p>
+                            <p class="text-secondary flex-grow-1">
+                                {{ article.excerpt|truncatewords:32 }}
+                            </p>
+                            <div class="mt-auto pt-3">
+                                <small class="text-muted">
+                                    {{ article.published_at|date:"d M Y" }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5 my-5">
+            <h3 class="text-muted mb-3">No featured stories yet</h3>
+            <p class="lead text-secondary">New articles will appear here soon.</p>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "core/base.html" %}
+{% load widget_tweaks static %}
+
+{% block title %}Edit Article - {{ article.title|truncatewords:6 }}{% endblock %}
+
+{% block extra_head %}
+  <!-- Optional: if you want a rich text editor later -->
+  <!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script> -->
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-9">
+
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <h2 class="mb-0">
+          <i class="bi bi-pencil-square me-2 text-primary"></i>
+          Edit Article
+        </h2>
+        <div>
+          <span class="badge bg-secondary me-2">Status: {{ article.get_status_display }}</span>
+          {% if article.published_at %}
+            <span class="text-muted small">Published {{ article.published_at|timesince }} ago</span>
+          {% else %}
+            <span class="text-muted small">Last updated {{ article.updated_at|default:article.created_at|timesince }} ago</span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if messages %}
+        <div class="mb-4">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="card border shadow-sm">
+        <div class="card-body p-4 p-lg-5">
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="mb-4">
+              <label class="form-label fw-bold" for="{{ form.title.id_for_label }}">Article Title</label>
+              {% render_field form.title class="form-control form-control-lg" placeholder="Enter a compelling title" %}
+              {% if form.title.errors %}
+                <div class="invalid-feedback d-block">{{ form.title.errors|join:" • " }}</div>
+              {% endif %}
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold" for="{{ form.slug.id_for_label }}">URL Slug</label>
+              {% render_field form.slug class="form-control" placeholder="my-article-title-2025" %}
+              <div class="form-text text-muted">
+                Used in the article URL. Leave blank to auto-generate from title.
+              </div>
+              {% if form.slug.errors %}
+                <div class="invalid-feedback d-block">{{ form.slug.errors|join:" • " }}</div>
+              {% endif %}
+            </div>
+
+            {% if form.publisher %}
+            <div class="mb-4">
+              <label class="form-label fw-bold" for="{{ form.publisher.id_for_label }}">Publisher</label>
+              {% render_field form.publisher class="form-select" %}
+              <div class="form-text text-muted">
+                Leave empty for independent / personal publication
+              </div>
+              {% if form.publisher.errors %}
+                <div class="invalid-feedback d-block">{{ form.publisher.errors|join:" • " }}</div>
+              {% endif %}
+            </div>
+            {% endif %}
+
+            <div class="mb-4">
+              <label class="form-label fw-bold" for="{{ form.excerpt.id_for_label }}">Excerpt / Lead paragraph</label>
+              {% render_field form.excerpt class="form-control" rows="3" placeholder="Short summary shown in feeds and social cards (recommended 120–300 characters)" %}
+              {% if form.excerpt.errors %}
+                <div class="invalid-feedback d-block">{{ form.excerpt.errors|join:" • " }}</div>
+              {% endif %}
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold" for="{{ form.content.id_for_label }}">Main Content</label>
+              {% render_field form.content class="form-control" rows="18" id="articleContent" %}
+              {% if form.content.errors %}
+                <div class="invalid-feedback d-block">{{ form.content.errors|join:" • " }}</div>
+              {% endif %}
+            </div>
+
+            <div class="d-flex flex-wrap gap-3 justify-content-between mt-5 pt-4 border-top">
+              <a href="{% url 'core:article_detail' article.pk %}" class="btn btn-outline-secondary btn-lg px-4">
+                <i class="bi bi-arrow-left me-2"></i> Cancel
+              </a>
+
+              <div class="d-flex gap-3">
+                <button type="submit" name="save_draft" value="true" class="btn btn-outline-primary btn-lg px-5">
+                  <i class="bi bi-floppy me-2"></i> Save Draft
+                </button>
+                <button type="submit" class="btn btn-primary btn-lg px-5">
+                  <i class="bi bi-save me-2"></i> Update Article
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ newsletter.title }} – News Platform{% endblock %}
+
+{% block content %}
+
+    <article class="bg-white rounded-4 shadow-sm p-4 p-md-5 mb-5">
+        <h1 class="mb-4 fw-bold">{{ newsletter.title }}</h1>
+
+        <div class="d-flex flex-wrap gap-3 mb-4 text-muted small">
+            <span>By <strong>{{ newsletter.author.get_full_name|default:newsletter.author.username }}</strong></span>
+            {% if newsletter.publisher %}
+                <span>• {{ newsletter.publisher.name }}</span>
+            {% endif %}
+            <span>• {{ newsletter.published_at|date:"d F Y" }}</span>
+        </div>
+
+        {% if newsletter.excerpt %}
+            <p class="lead text-muted border-start border-primary ps-3 mb-4">
+                {{ newsletter.excerpt }}
+            </p>
+        {% endif %}
+
+        <div class="newsletter-content fs-5 lh-lg mb-5">
+            {{ newsletter.content|linebreaks }}
+        </div>
+
+        {% if user.is_authenticated and user == newsletter.author %}
+            <div class="mt-5 pt-4 border-top d-flex gap-3 flex-wrap">
+                <a href="{% url 'newsletter_update' newsletter.pk %}" class="btn btn-outline-primary px-4">
+                    Edit Newsletter
+                </a>
+                {% if newsletter.status == 'draft' %}
+                    <form method="post" action="{% url 'core:newsletter_publish' newsletter.pk %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success px-4">
+                            Publish Now
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        {% endif %}
+    </article>
+
+{% endblock %}

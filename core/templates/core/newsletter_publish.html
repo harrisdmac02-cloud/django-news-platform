@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Publish Newsletter – News Platform{% endblock %}
+
+{% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-7">
+
+            <div class="card shadow-sm border-0 rounded-4 mt-5 text-center p-5">
+                <div class="py-4">
+
+                    <h2 class="fw-bold mb-4">Ready to Publish?</h2>
+
+                    <p class="lead text-muted mb-5">
+                        You're about to make this newsletter public.<br>
+                        <strong>{{ newsletter.title }}</strong> will be visible to your subscribers.
+                    </p>
+
+                    <div class="mb-5">
+                        <div class="bg-light rounded-3 p-4 mb-3">
+                            <h5 class="fw-medium mb-2">{{ newsletter.title }}</h5>
+                            <p class="text-muted small mb-1">
+                                By {{ newsletter.author.get_full_name|default:newsletter.author.username }}
+                                {% if newsletter.publisher %} • {{ newsletter.publisher.name }}{% endif %}
+                            </p>
+                            <p class="text-secondary">
+                                {{ newsletter.excerpt|truncatewords:35|default:"No excerpt" }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-lg rounded-pill px-5 py-3 fw-medium">
+                            Yes, Publish Now
+                        </button>
+                    </form>
+
+                    <a href="{{ newsletter.get_absolute_url }}"
+                       class="btn btn-outline-secondary btn-lg rounded-pill px-5 py-3 ms-3 fw-medium">
+                        Cancel – Go Back
+                    </a>
+
+                    <p class="text-muted small mt-5">
+                        Once published, this action cannot be undone without editing.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

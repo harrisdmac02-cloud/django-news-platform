@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ publisher.name }} Dashboard – News Platform{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
+        <div>
+            <h1 class="fw-bold mb-1">{{ publisher.name }}</h1>
+            <p class="text-muted mb-0">Publisher Dashboard</p>
+        </div>
+        <a href="{% url 'core:publisher_articles' publisher.pk %}" class="btn btn-outline-primary rounded-pill">
+            View All Articles
+        </a>
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        <!-- Stats cards -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4 h-100">
+                <h5 class="mb-3 text-muted">Published Articles</h5>
+                <div class="display-5 fw-bold text-success">
+                    {{ published_count|default:0 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4 h-100">
+                <h5 class="mb-3 text-muted">Pending Review</h5>
+                <div class="display-5 fw-bold text-warning">
+                    {{ pending_count|default:0 }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4 h-100">
+                <h5 class="mb-3 text-muted">Subscribers</h5>
+                <div class="display-5 fw-bold text-primary">
+                    {{ publisher.subscribed_readers.count|default:0 }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Pending articles -->
+    <div class="mt-5">
+        <h4 class="fw-semibold mb-4">Pending Articles ({{ pending_articles|length|default:0 }})</h4>
+
+        {% if pending_articles %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for article in pending_articles %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-4">
+                            <div class="card-body">
+                                <h6 class="card-title fw-semibold">
+                                    <a href="{% url 'core:article_approve' article.pk %}" class="text-dark text-decoration-none">
+                                        {{ article.title|truncatewords:10 }}
+                                    </a>
+                                </h6>
+                                <div class="small text-muted mt-2">
+                                    By {{ article.author.username }} • {{ article.created_at|date:"d M Y" }}
+                                </div>
+                                <p class="text-secondary small mt-3">
+                                    {{ article.excerpt|truncatewords:30|default:"..." }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-light text-center py-5 rounded-4">
+                <p class="lead text-muted mb-3">No pending articles</p>
+                <p class="text-muted">
+                    All submitted articles have been reviewed or published.
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

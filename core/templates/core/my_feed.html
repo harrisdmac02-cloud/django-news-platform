@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}My Feed - News Platform{% endblock %}
+
+{% block content %}
+
+    <h1 class="mb-4 text-center">My Personalized Feed</h1>
+
+    {% if articles %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for article in articles %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        {% if article.lead_image %}
+                            <img src="{{ article.lead_image.image.url }}"
+                                 class="card-img-top"
+                                 alt="{{ article.lead_image.alt_text|default:article.title }}"
+                                 style="height: 160px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title article-title">
+                                <a href="{{ article.get_absolute_url }}" class="text-decoration-none text-dark">
+                                    {{ article.title }}
+                                </a>
+                            </h5>
+                            <p class="card-text text-muted small mb-2">
+                                By {{ article.author.get_full_name|default:article.author.username }}
+                                {% if article.publisher %} • {{ article.publisher.name }}{% endif %}
+                            </p>
+                            <p class="card-text text-secondary">
+                                {{ article.excerpt|truncatewords:25 }}
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <small class="text-muted">
+                                {{ article.published_at|date:"d M Y" }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5 my-5">
+            <h4 class="text-muted mb-3">Your feed is empty</h4>
+            <p class="lead text-secondary">
+                Start by subscribing to publishers or following journalists to see their latest articles here.
+            </p>
+            <a href="{% url 'publishers' %}" class="btn btn-outline-primary mt-3">
+                Discover Publishers
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}

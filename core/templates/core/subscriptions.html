@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}My Subscriptions - News Platform{% endblock %}
+
+{% block content %}
+
+    <h1 class="mb-4 text-center">My Subscriptions & Follows</h1>
+
+    {% if has_subscriptions %}
+
+        <h4 class="mt-5 mb-3">Subscribed Publishers</h4>
+        {% if subscribed_publishers %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for pub in subscribed_publishers %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body text-center">
+                                <h5 class="card-title mb-3">{{ pub.name }}</h5>
+                                {% if pub.description %}
+                                    <p class="card-text text-muted small">{{ pub.description|truncatewords:20 }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer bg-white border-0 text-center">
+                                <a href="{% url 'publisher_articles' pub.pk %}" class="btn btn-outline-primary btn-sm">
+                                    View Articles
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">You haven't subscribed to any publishers yet.</p>
+        {% endif %}
+
+        <h4 class="mt-5 mb-3">Followed Journalists</h4>
+        {% if followed_journalists %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for journ in followed_journalists %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 text-center">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">{{ journ.get_full_name|default:journ.username }}</h5>
+                                {% if journ.bio %}
+                                    <p class="text-muted small">{{ journ.bio|truncatewords:18 }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer bg-white border-0">
+                                <a href="{% url 'journalist_profile' journ.username %}" class="btn btn-outline-primary btn-sm">
+                                    View Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">You aren't following any journalists yet.</p>
+        {% endif %}
+
+    {% else %}
+        <div class="text-center py-5 my-5">
+            <h4 class="text-muted mb-3">No subscriptions yet</h4>
+            <p class="lead text-secondary">
+                Follow journalists and subscribe to publishers to build your personal news feed.
+            </p>
+            <a href="{% url 'publishers' %}" class="btn btn-primary mt-3">
+                Find Publishers & Journalists
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}

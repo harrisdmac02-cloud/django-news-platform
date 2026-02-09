@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ journalist.get_full_name|default:journalist.username }} – News Platform{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden mt-4">
+                <div class="card-body p-5 text-center">
+
+                    <!-- Profile picture -->
+                    {% if journalist.profile_picture %}
+                        <img src="{{ journalist.profile_picture.url }}"
+                             alt="{{ journalist.get_full_name|default:journalist.username }}"
+                             class="rounded-circle mb-4 shadow-lg"
+                             style="width: 160px; height: 160px; object-fit: cover; border: 6px solid #fff;">
+                    {% else %}
+                        <div class="rounded-circle bg-gradient d-flex align-items-center justify-content-center mb-4 shadow-lg mx-auto"
+                             style="width: 160px; height: 160px; font-size: 5.5rem; color: white; background: linear-gradient(135deg, #6366f1, #a78bfa);">
+                            {{ journalist.get_full_name|slice:":1"|upper|default:journalist.username|slice:":1"|upper }}
+                        </div>
+                    {% endif %}
+
+                    <!-- Name & Role -->
+                    <h2 class="fw-bold mb-2">{{ journalist.get_full_name|default:journalist.username }}</h2>
+                    <div class="mb-4">
+                        <span class="badge bg-gradient text-white fs-5 px-4 py-2"
+                              style="background: linear-gradient(90deg, #6366f1, #a78bfa);">
+                            Journalist
+                        </span>
+                    </div>
+
+                    <!-- Bio -->
+                    {% if journalist.bio %}
+                        <p class="lead text-muted mb-4 px-md-5">{{ journalist.bio|linebreaksbr }}</p>
+                    {% else %}
+                        <p class="text-muted fst-italic mb-5">No biography added yet.</p>
+                    {% endif %}
+
+                    <!-- Followers count -->
+                    <div class="mb-4">
+                        <h5 class="text-muted">
+                            <strong class="text-dark">{{ journalist.journalist_followers.count|default:0 }}</strong> followers
+                        </h5>
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="d-grid gap-3 d-md-flex justify-content-center">
+                        <a href="{% url 'core:journalist_articles' journalist.username %}"
+                           class="btn btn-primary btn-lg rounded-pill px-5 fw-medium">
+                            View All Articles
+                        </a>
+
+                        {% if user.is_authenticated and user.is_reader %}
+                            {% if user.subscribed_journalists.filter(pk=journalist.pk).exists %}
+                                <form action="{% url 'core:unfollow_journalist' journalist.username %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-danger btn-lg rounded-pill px-5 fw-medium">
+                                        Unfollow
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form action="{% url 'core:follow_journalist' journalist.username %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-outline-primary btn-lg rounded-pill px-5 fw-medium">
+                                        Follow
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

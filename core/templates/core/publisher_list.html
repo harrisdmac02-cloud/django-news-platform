@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}All Publishers - News Platform{% endblock %}
+
+{% block content %}
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Publishers</h1>
+        <p class="lead text-muted">Discover trusted sources and subscribe to their latest stories</p>
+    </div>
+
+    {% if publishers %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for publisher in publishers %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 rounded-4 text-center p-4">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold mb-3">{{ publisher.name }}</h4>
+
+                            {% if publisher.description %}
+                                <p class="text-muted mb-4">
+                                    {{ publisher.description|truncatewords:30 }}
+                                </p>
+                            {% else %}
+                                <p class="text-muted fst-italic small mb-4">No description provided</p>
+                            {% endif %}
+
+                            {% if publisher.website %}
+                                <p class="mb-4">
+                                    <a href="{{ publisher.website }}" target="_blank" class="text-primary small">
+                                        {{ publisher.website|truncatechars:40 }} →
+                                    </a>
+                                </p>
+                            {% endif %}
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <a href="{% url 'publisher_articles' publisher.pk %}"
+                               class="btn btn-outline-primary rounded-pill px-4">
+                                View Articles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5 my-5 bg-light rounded-4">
+            <h4 class="text-muted">No publishers available yet</h4>
+            <p class="lead text-secondary">New publishers will appear here soon.</p>
+        </div>
+    {% endif %}
+
+{% endblock %}

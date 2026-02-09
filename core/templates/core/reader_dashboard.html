@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Reader Dashboard - News Platform{% endblock %}
+
+{% block content %}
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Your Reader Dashboard</h1>
+        <p class="lead text-muted">Recent articles from your subscriptions & followed journalists</p>
+    </div>
+
+    <!-- Recent Feed Preview -->
+    {% if recent_feed_articles %}
+        <h4 class="mb-4 fw-semibold">Latest in Your Feed</h4>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+            {% for article in recent_feed_articles %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 rounded-4">
+                        {% if article.lead_image %}
+                            <img src="{{ article.lead_image.image.url }}"
+                                 class="card-img-top"
+                                 alt="{{ article.title }}"
+                                 style="height: 180px; object-fit: cover;">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="article-title fw-semibold">
+                                <a href="{{ article.get_absolute_url }}" class="text-dark text-decoration-none stretched-link">
+                                    {{ article.title }}
+                                </a>
+                            </h5>
+                            <p class="text-muted small mt-2 mb-3">
+                                {{ article.author.get_full_name|default:article.author.username }}
+                                {% if article.publisher %} • {{ article.publisher.name }}{% endif %}
+                            </p>
+                            <p class="text-secondary">
+                                {{ article.excerpt|truncatewords:28 }}
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pt-0">
+                            <small class="text-muted">{{ article.published_at|date:"d M Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-5 my-5 bg-light rounded-4">
+            <h4 class="text-muted mb-3">Your feed is quiet right now</h4>
+            <p class="lead text-secondary mb-4">
+                Subscribe to more publishers or follow journalists to see fresh content here.
+            </p>
+            <a href="{% url 'publishers' %}" class="btn btn-primary px-4 rounded-pill">
+                Discover Publishers
+            </a>
+        </div>
+    {% endif %}
+
+    <!-- Quick Stats / Links -->
+    <div class="row g-4 mt-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4">
+                <h5 class="mb-3">Subscribed Publishers</h5>
+                <p class="display-6 fw-bold text-primary">{{ subscribed_publishers.count|default:0 }}</p>
+                <a href="{% url 'subscriptions' %}" class="btn btn-outline-primary mt-3 rounded-pill btn-sm">
+                    Manage Subscriptions
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-4 text-center p-4">
+                <h5 class="mb-3">Followed Journalists</h5>
+                <p class="display-6 fw-bold text-primary">{{ followed_journalists.count|default:0 }}</p>
+                <a href="{% url 'subscriptions' %}" class="btn btn-outline-primary mt-3 rounded-pill btn-sm">
+                    Manage Follows
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
