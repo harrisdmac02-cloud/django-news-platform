@@ -15,9 +15,16 @@ from .permissions import IsApiClientForSubscribedContent
 
 class MyPersonalizedFeedView(generics.ListAPIView):
     """
-    API endpoint for personalized feed for authenticated reader:
-        - Articles from publishers the user is subscribed to
-        - Articles from independent journalists the user follows
+    Personalized feed endpoint for authenticated readers.
+
+    Returns published articles from:
+    - Publishers the user is subscribed to
+    - Independent journalists (no publisher) the user follows
+
+    Features:
+    - Requires user authentication
+    - Ordered by most recently published first
+    - Uses efficient select_related + distinct
     """
     serializer_class = ArticleListSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -50,7 +57,14 @@ class MyPersonalizedFeedView(generics.ListAPIView):
 
 
 class ArticleListView(generics.ListAPIView):
-    """API endpoint for public list of latest published articles."""
+    """
+    Public endpoint listing the most recent published articles.
+
+    - Accessible without authentication
+    - Returns summary view (via ArticleListSerializer)
+    - Ordered by publication date (newest first)
+    - Suitable for homepage feeds, discovery, etc.
+    """
     serializer_class = ArticleListSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -61,7 +75,14 @@ class ArticleListView(generics.ListAPIView):
 
 
 class ArticleDetailView(generics.RetrieveAPIView):
-    """API endpoint for public detail of any published article."""
+    """
+    Public endpoint for retrieving full details of a single published article.
+
+    - Accessible without authentication
+    - Uses ArticleDetailSerializer (includes full content, etc.)
+    - Only published articles are accessible
+    - Lookup by article ID
+    """
     serializer_class = ArticleDetailSerializer
     permission_classes = [permissions.AllowAny]
     lookup_field = 'id'
@@ -72,7 +93,14 @@ class ArticleDetailView(generics.RetrieveAPIView):
 
 
 class PublisherArticlesView(generics.ListAPIView):
-    """API endpoint for all published articles of one publisher."""
+    """
+    Public endpoint listing all published articles from a specific publisher.
+
+    - Accessible without authentication
+    - Ordered by publication date (newest first)
+    - Uses publisher pk from URL
+    - Returns summary serializer (ArticleListSerializer)
+    """
     serializer_class = ArticleListSerializer
     permission_classes = [permissions.AllowAny]
 
@@ -85,7 +113,17 @@ class PublisherArticlesView(generics.ListAPIView):
 
 
 class JournalistArticlesView(generics.ListAPIView):
-    """API endpoint for all published articles of one journalist (independent + publisher articles)."""
+    """
+    Public endpoint listing all published articles by a specific journalist.
+
+    Returns:
+    - Articles published independently (no publisher)
+    - Articles published through any publisher
+
+    - Accessible without authentication
+    - Lookup by journalist's username (URL kwarg)
+    - Ordered by publication date (newest first)
+    """
     serializer_class = ArticleListSerializer
     permission_classes = [permissions.AllowAny]
 

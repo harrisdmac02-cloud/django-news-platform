@@ -50,6 +50,18 @@ class CustomUser(AbstractUser):
         """Check if the user belongs to the 'Editor' group."""
         return self.groups.filter(name='Editor').exists()
 
+    @is_reader.setter
+    def is_reader(self, value):
+        self._is_reader = value
+
+    @is_journalist.setter
+    def is_journalist(self, value):
+        self._is_journalist = value
+
+    @is_editor.setter
+    def is_editor(self, value):
+        self._is_editor = value
+
 
 class Publisher(models.Model):
     """
