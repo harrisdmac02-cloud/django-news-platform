@@ -38,9 +38,15 @@ from .serializers import ArticleListSerializer
 @permission_required('core.change_article', raise_exception=True)
 def article_approve(request, pk):
     """
-    Allow editors to approve, reject, or change the status of an article.
+    Editor-only view to review and change the status of a pending article.
 
-    On approval, calls article.publish() and sends notifications.
+    - If already published or rejected → shows warning and redirects.
+    - On POST with valid form:
+      - 'approved' → calls article.publish() and notifies subscribers
+      - other statuses → updates status only
+    - GET → displays approval form
+
+    Requires 'core.change_article' permission.
     """
     article = get_object_or_404(Article, pk=pk)
     if article.status in ['published', 'rejected']:
@@ -74,8 +80,15 @@ def article_approve(request, pk):
 
 def send_notifications_to_subscribers(article):
     """
-    Send email notifications to all readers subscribed to the publisher
-    or following the journalist who authored the article.
+    Send email notifications about a newly published article to:
+    - Readers subscribed to the article's publisher (if any)
+    - Readers following the article's author (if journalist)
+
+    Skips if:
+    - No email backend configured
+    - No subscribers found
+
+    Uses Django's send_mass_mail() for efficiency.
     """
     if not settings.EMAIL_HOST:
         print("Email settings not configured - skipping notifications")
@@ -112,8 +125,19 @@ def send_notifications_to_subscribers(article):
 
 def post_to_x(article):
     """
-    Post a tweet about a newly published article to X (Twitter).
-    Requires TWITTER_BEARER_TOKEN in settings.
+    Publish a tweet announcing a newly published article to X (Twitter).
+
+    Requirements:
+    - TWITTER_BEARER_TOKEN must be set in Django settings
+    - Article must have a valid get_absolute_url()
+
+    Posts a concise message (≤280 characters) including:
+    - Article title
+    - Author username
+    - Full link
+    - Basic hashtags
+
+    Logs success/failure to console (no user-facing feedback).
     """
     if not hasattr(settings, 'TWITTER_BEARER_TOKEN'):
         print("Twitter/X credentials not configured")
@@ -151,7 +175,12 @@ def post_to_x(article):
 @journalist_required
 def article_create(request):
     """
-    Allow journalists to create a new article (starts as 'pending' status).
+    View for journalists to create a new article.
+
+    - New articles start with status='pending'
+    - Author is automatically set to the logged-in journalist
+    - Uses ArticleForm (should exclude status, author, etc.)
+    - On success → redirects to article detail
     """
     if request.method == 'POST':
         form = ArticleForm(request.POST)
@@ -174,7 +203,15 @@ def article_create(request):
 @login_required
 def article_update(request, pk):
     """
-    Allow the article author (journalist) or an editor to update an article.
+    View allowing article authors (journalists) or editors to edit an existing article.
+
+    Permission rules:
+    - Article author (if journalist) can edit their own articles
+    - Editors (is_editor=True or appropriate perms) can edit any article
+
+    - Does NOT allow editing published articles in most workflows
+      (business logic should be added if needed)
+    - Uses same ArticleForm as creation
     """
     article = get_object_or_404(Article, pk=pk)
 
