@@ -1,34 +1,31 @@
-﻿# Use an official Python runtime as the base image
+﻿# Use an official Python runtime as base image
 FROM python:3.11-slim
 
-# Set environment variables
+# Prevent Python from writing .pyc files and buffering stdout/stderr
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set working directory
+# Set work directory
 WORKDIR /app
 
-# Install system dependencies (for mysqlclient, Pillow, etc.)
-RUN apt-get update && apt-get install -y \
+# Install system dependencies needed for mysqlclient + Pillow
+RUN apt-get update && apt-get install -y --no-install-recommends \
     default-libmysqlclient-dev \
     build-essential \
     pkg-config \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first (optimizes Docker cache)
+# Copy requirements first → better caching
 COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire project
+# Copy the whole project
 COPY . .
 
-# Collect static files (uncomment in production)
-# RUN python manage.py collectstatic --noinput
-
-# Expose the port the app runs on
+# Expose port (Django development server)
 EXPOSE 8000
 
-# Run the application (development server)
+# Run development server (change to gunicorn in production)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
