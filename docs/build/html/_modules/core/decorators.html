@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>core.decorators &mdash; Django News Platform 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=01f34227"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -39,8 +39,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">core</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -80,20 +83,9 @@
 <span class="sd">    Decorator that restricts access to views to users who are journalists.</span>
 
 <span class="sd">    This decorator:</span>
-<span class="sd">    - Requires the user to be logged in (combines with @login_required)</span>
+<span class="sd">    - Requires the user to be logged in</span>
 <span class="sd">    - Checks if the user has the &#39;is_journalist&#39; property set to True</span>
 <span class="sd">    - Redirects non-journalists to the home page with an error message</span>
-
-<span class="sd">    Usage:</span>
-<span class="sd">        @journalist_required</span>
-<span class="sd">        def create_article(request):</span>
-<span class="sd">            ...</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        view_func: The view function to decorate.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        function: The wrapped view function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
     <span class="nd">@login_required</span>
@@ -116,17 +108,6 @@
 <span class="sd">    - Requires the user to be logged in (combines with @login_required)</span>
 <span class="sd">    - Checks if the user has the &#39;is_editor&#39; property set to True</span>
 <span class="sd">    - Redirects non-editors to the home page with an error message</span>
-
-<span class="sd">    Usage:</span>
-<span class="sd">        @editor_required</span>
-<span class="sd">        def approve_article(request, pk):</span>
-<span class="sd">            ...</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        view_func: The view function to decorate.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        function: The wrapped view function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">view_func</span><span class="p">)</span>
     <span class="nd">@login_required</span>
@@ -146,7 +127,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2026, harrisdmac02-cloud.</p>
+    <p>&#169; Copyright .</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

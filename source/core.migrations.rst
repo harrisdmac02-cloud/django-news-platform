@@ -9,77 +9,77 @@ core.migrations.0001\_initial module
 
 .. automodule:: core.migrations.0001_initial
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0002\_customuser\_subscribed\_journalists module
 ----------------------------------------------------------------
 
 .. automodule:: core.migrations.0002_customuser_subscribed_journalists
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0003\_auto\_20260121\_2032 module
 -------------------------------------------------
 
 .. automodule:: core.migrations.0003_auto_20260121_2032
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0004\_category\_alter\_customuser\_subscribed\_journalists\_and\_more module
 --------------------------------------------------------------------------------------------
 
 .. automodule:: core.migrations.0004_category_alter_customuser_subscribed_journalists_and_more
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0005\_newsletter module
 ---------------------------------------
 
 .. automodule:: core.migrations.0005_newsletter
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0006\_article\_notifications\_sent\_and\_more module
 --------------------------------------------------------------------
 
 .. automodule:: core.migrations.0006_article_notifications_sent_and_more
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0007\_apiclient module
 --------------------------------------
 
 .. automodule:: core.migrations.0007_apiclient
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0008\_alter\_apiclient\_api\_key module
 -------------------------------------------------------
 
 .. automodule:: core.migrations.0008_alter_apiclient_api_key
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 core.migrations.0009\_alter\_apiclient\_api\_key module
 -------------------------------------------------------
 
 .. automodule:: core.migrations.0009_alter_apiclient_api_key
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: core.migrations
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

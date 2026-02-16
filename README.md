@@ -132,6 +132,24 @@ Modern Django-based news publishing platform with role-based access and social f
   - Check personalized feed at /my-feed/
   - Verify email notifications (console backend by default)
 
+10. **Running with Docker**
+    Build the Docker image:
+     - Run:
+       ```bash
+       docker build -t django-news-platform .
+     ```
+     - Run the container
+     ```bash
+     docker run --rm -p 8000:8000 django-news-platform
+     ```
+     -  Open http://localhost:8000/Note: This basic Dockerfile uses SQLite inside the container (no external DB).
+     - Stop the container: Ctrl+C in terminal
+     
+## Troubleshooting
+- "Site matching query does not exist" → follow step 5
+- MySQL connection error → verify DATABASES settings
+-Docker build fails on mysqlclient → ensure default-libmysqlclient-dev is installed in the image
+- No documentation in Sphinx → check docs/source/conf.py has correct DJANGO_SETTINGS_MODULE
 
 ## File Cleanup Notes
 - **Remove blank/unnecessary files:** If there's a blank `requirements.txt` in the root or `Django news_project/` folder, delete it (we created a new one in step 3). No duplicates were found in the provided files, but ensure no extra `db.sqlite3` exists (add to `.gitignore` as per previous advice).

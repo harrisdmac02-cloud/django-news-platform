@@ -17,117 +17,117 @@ core.admin module
 
 .. automodule:: core.admin
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.api\_urls module
 ---------------------
 
 .. automodule:: core.api_urls
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.api\_views module
 ----------------------
 
 .. automodule:: core.api_views
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.apps module
 ----------------
 
 .. automodule:: core.apps
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.authentication module
 --------------------------
 
 .. automodule:: core.authentication
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.decorators module
 ----------------------
 
 .. automodule:: core.decorators
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.forms module
 -----------------
 
 .. automodule:: core.forms
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.models module
 ------------------
 
 .. automodule:: core.models
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.permissions module
 -----------------------
 
 .. automodule:: core.permissions
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.serializers module
 -----------------------
 
 .. automodule:: core.serializers
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.signals module
 -------------------
 
 .. automodule:: core.signals
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.tests module
 -----------------
 
 .. automodule:: core.tests
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.urls module
 ----------------
 
 .. automodule:: core.urls
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 core.views module
 -----------------
 
 .. automodule:: core.views
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
 
 Module contents
 ---------------
 
 .. automodule:: core
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

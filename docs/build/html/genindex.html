@@ -7,14 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Index &mdash; Django News Platform 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="_static/documentation_options.js?v=01f34227"></script>
-      <script src="_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="#" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -39,8 +39,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">core</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -131,20 +134,32 @@
 </li>
       <li><a href="core.html#core.models.Article.NotUpdated">Article.NotUpdated</a>
 </li>
+      <li><a href="core.html#core.views.article_approve">article_approve() (in module core.views)</a>
+</li>
+      <li><a href="core.html#core.views.article_create">article_create() (in module core.views)</a>
+</li>
+      <li><a href="core.html#core.views.article_delete">article_delete() (in module core.views)</a>
+</li>
       <li><a href="core.html#core.models.ArticleImage.article_id">article_id (core.models.ArticleImage attribute)</a>
+</li>
+      <li><a href="core.html#core.views.article_update">article_update() (in module core.views)</a>
 </li>
       <li><a href="core.html#core.forms.ArticleApprovalForm">ArticleApprovalForm (class in core.forms)</a>
 </li>
       <li><a href="core.html#core.forms.ArticleApprovalForm.Meta">ArticleApprovalForm.Meta (class in core.forms)</a>
 </li>
-      <li><a href="core.html#core.serializers.ArticleDetailSerializer">ArticleDetailSerializer (class in core.serializers)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.serializers.ArticleDetailSerializer">ArticleDetailSerializer (class in core.serializers)</a>
+</li>
       <li><a href="core.html#core.serializers.ArticleDetailSerializer.Meta">ArticleDetailSerializer.Meta (class in core.serializers)</a>
 </li>
       <li><a href="core.html#core.api_views.ArticleDetailView">ArticleDetailView (class in core.api_views)</a>
+
+      <ul>
+        <li><a href="core.html#core.views.ArticleDetailView">(class in core.views)</a>
 </li>
+      </ul></li>
       <li><a href="core.html#core.forms.ArticleForm">ArticleForm (class in core.forms)</a>
 </li>
       <li><a href="core.html#core.forms.ArticleForm.Meta">ArticleForm.Meta (class in core.forms)</a>
@@ -162,7 +177,11 @@
       <li><a href="core.html#core.serializers.ArticleListSerializer.Meta">ArticleListSerializer.Meta (class in core.serializers)</a>
 </li>
       <li><a href="core.html#core.api_views.ArticleListView">ArticleListView (class in core.api_views)</a>
+
+      <ul>
+        <li><a href="core.html#core.views.ArticleListView">(class in core.views)</a>
 </li>
+      </ul></li>
       <li><a href="core.html#core.serializers.ArticlePublicSerializer">ArticlePublicSerializer (class in core.serializers)</a>
 </li>
       <li><a href="core.html#core.serializers.ArticlePublicSerializer.Meta">ArticlePublicSerializer.Meta (class in core.serializers)</a>
@@ -243,6 +262,24 @@
         <li><a href="core.html#core.models.Newsletter.content">(core.models.Newsletter attribute)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.views.ArticleDetailView.context_object_name">context_object_name (core.views.ArticleDetailView attribute)</a>
+
+      <ul>
+        <li><a href="core.html#core.views.ArticleListView.context_object_name">(core.views.ArticleListView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.HomeView.context_object_name">(core.views.HomeView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.JournalistProfileView.context_object_name">(core.views.JournalistProfileView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.MyFeedView.context_object_name">(core.views.MyFeedView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.NewsletterDetailView.context_object_name">(core.views.NewsletterDetailView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherDashboardView.context_object_name">(core.views.PublisherDashboardView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherListView.context_object_name">(core.views.PublisherListView attribute)</a>
+</li>
+      </ul></li>
       <li>
     core
 
@@ -313,6 +350,8 @@
         <li><a href="core.migrations.html#module-core.migrations.0001_initial">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     core.migrations.0002_customuser_subscribed_journalists
 
@@ -327,8 +366,6 @@
         <li><a href="core.migrations.html#module-core.migrations.0003_auto_20260121_2032">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     core.migrations.0004_category_alter_customuser_subscribed_journalists_and_more
 
@@ -432,6 +469,8 @@
         <li><a href="core.html#core.models.Publisher.created_at">(core.models.Publisher attribute)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.views.CustomLoginView">CustomLoginView (class in core.views)</a>
+</li>
       <li><a href="core.html#core.models.CustomUser">CustomUser (class in core.models)</a>
 </li>
       <li><a href="core.html#core.models.CustomUser.DoesNotExist">CustomUser.DoesNotExist</a>
@@ -542,6 +581,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.models.CustomUser.first_name">first_name (core.models.CustomUser attribute)</a>
 </li>
+      <li><a href="core.html#core.views.follow_journalist">follow_journalist() (in module core.views)</a>
+</li>
+      <li><a href="core.html#core.views.SignUpView.form_class">form_class (core.views.SignUpView attribute)</a>
+</li>
+      <li><a href="core.html#core.views.SignUpView.form_valid">form_valid() (core.views.SignUpView method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -554,6 +599,22 @@
         <li><a href="core.html#core.models.Newsletter.get_absolute_url">(core.models.Newsletter method)</a>
 </li>
         <li><a href="core.html#core.serializers.ArticlePublicSerializer.get_absolute_url">(core.serializers.ArticlePublicSerializer method)</a>
+</li>
+      </ul></li>
+      <li><a href="core.html#core.views.ArticleListView.get_context_data">get_context_data() (core.views.ArticleListView method)</a>
+
+      <ul>
+        <li><a href="core.html#core.views.JournalistDashboardView.get_context_data">(core.views.JournalistDashboardView method)</a>
+</li>
+        <li><a href="core.html#core.views.JournalistProfileView.get_context_data">(core.views.JournalistProfileView method)</a>
+</li>
+        <li><a href="core.html#core.views.MySubscriptionsView.get_context_data">(core.views.MySubscriptionsView method)</a>
+</li>
+        <li><a href="core.html#core.views.ProfileView.get_context_data">(core.views.ProfileView method)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherDashboardView.get_context_data">(core.views.PublisherDashboardView method)</a>
+</li>
+        <li><a href="core.html#core.views.ReaderDashboardView.get_context_data">(core.views.ReaderDashboardView method)</a>
 </li>
       </ul></li>
       <li><a href="core.html#core.tests.SubscribedArticlesFeedAPITest.get_feed_url">get_feed_url() (core.tests.SubscribedArticlesFeedAPITest method)</a>
@@ -582,8 +643,6 @@
       </ul></li>
       <li><a href="core.html#core.models.CustomUser.get_previous_by_date_joined">get_previous_by_date_joined() (core.models.CustomUser method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.api_views.ArticleDetailView.get_queryset">get_queryset() (core.api_views.ArticleDetailView method)</a>
 
       <ul>
@@ -607,7 +666,23 @@
 </li>
         <li><a href="core.html#core.api_views.SubscribedArticlesFeed.get_queryset">(core.api_views.SubscribedArticlesFeed method)</a>
 </li>
+        <li><a href="core.html#core.views.ArticleDetailView.get_queryset">(core.views.ArticleDetailView method)</a>
+</li>
+        <li><a href="core.html#core.views.ArticleListView.get_queryset">(core.views.ArticleListView method)</a>
+</li>
+        <li><a href="core.html#core.views.HomeView.get_queryset">(core.views.HomeView method)</a>
+</li>
+        <li><a href="core.html#core.views.JournalistProfileView.get_queryset">(core.views.JournalistProfileView method)</a>
+</li>
+        <li><a href="core.html#core.views.MyFeedView.get_queryset">(core.views.MyFeedView method)</a>
+</li>
+        <li><a href="core.html#core.views.NewsletterDetailView.get_queryset">(core.views.NewsletterDetailView method)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherDashboardView.get_queryset">(core.views.PublisherDashboardView method)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.api_views.PublicJournalistArticlesView.get_serializer_context">get_serializer_context() (core.api_views.PublicJournalistArticlesView method)</a>
 </li>
       <li><a href="core.html#core.models.Article.get_status_display">get_status_display() (core.models.Article method)</a>
@@ -616,6 +691,8 @@
         <li><a href="core.html#core.models.Newsletter.get_status_display">(core.models.Newsletter method)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.views.CustomLoginView.get_success_url">get_success_url() (core.views.CustomLoginView method)</a>
+</li>
       <li><a href="core.html#core.models.CustomUser.groups">groups (core.models.CustomUser attribute)</a>
 </li>
   </ul></td>
@@ -629,6 +706,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.permissions.IsApiClientForSubscribedContent.has_permission">has_permission() (core.permissions.IsApiClientForSubscribedContent method)</a>
+</li>
+      <li><a href="core.html#core.views.HomeView">HomeView (class in core.views)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -689,12 +768,20 @@
       <li><a href="core.html#core.models.CustomUser.journalist_followers">journalist_followers (core.models.CustomUser attribute)</a>
 </li>
       <li><a href="core.html#core.decorators.journalist_required">journalist_required() (in module core.decorators)</a>
+
+      <ul>
+        <li><a href="core.html#core.views.journalist_required">(in module core.views)</a>
+</li>
+      </ul></li>
+      <li><a href="core.html#core.api_views.JournalistArticlesPublic">JournalistArticlesPublic (class in core.api_views)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="core.html#core.api_views.JournalistArticlesPublic">JournalistArticlesPublic (class in core.api_views)</a>
-</li>
       <li><a href="core.html#core.api_views.JournalistArticlesView">JournalistArticlesView (class in core.api_views)</a>
+</li>
+      <li><a href="core.html#core.views.JournalistDashboardView">JournalistDashboardView (class in core.views)</a>
+</li>
+      <li><a href="core.html#core.views.JournalistProfileView">JournalistProfileView (class in core.views)</a>
 </li>
       <li><a href="core.html#core.models.Publisher.journalists">journalists (core.models.Publisher attribute)</a>
 </li>
@@ -712,16 +799,24 @@
 </li>
       <li><a href="core.html#core.models.ArticleImage.lead_articles">lead_articles (core.models.ArticleImage attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.models.Article.lead_image">lead_image (core.models.Article attribute)</a>
 </li>
       <li><a href="core.html#core.models.Article.lead_image_id">lead_image_id (core.models.Article attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.api_views.PublicJournalistArticlesView.list">list() (core.api_views.PublicJournalistArticlesView method)</a>
 </li>
       <li><a href="core.html#core.models.CustomUser.logentry_set">logentry_set (core.models.CustomUser attribute)</a>
 </li>
+      <li><a href="core.html#core.views.MySubscriptionsView.login_url">login_url (core.views.MySubscriptionsView attribute)</a>
+
+      <ul>
+        <li><a href="core.html#core.views.ProfileView.login_url">(core.views.ProfileView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.SubscribePublisherView.login_url">(core.views.SubscribePublisherView attribute)</a>
+</li>
+      </ul></li>
       <li><a href="core.html#core.api_views.ArticleDetailView.lookup_field">lookup_field (core.api_views.ArticleDetailView attribute)</a>
 </li>
   </ul></td>
@@ -781,7 +876,25 @@
 </li>
         <li><a href="core.html#core.serializers.PublisherSerializer.Meta.model">(core.serializers.PublisherSerializer.Meta attribute)</a>
 </li>
+        <li><a href="core.html#core.views.ArticleDetailView.model">(core.views.ArticleDetailView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.ArticleListView.model">(core.views.ArticleListView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.HomeView.model">(core.views.HomeView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.JournalistProfileView.model">(core.views.JournalistProfileView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.MyFeedView.model">(core.views.MyFeedView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.NewsletterDetailView.model">(core.views.NewsletterDetailView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherDashboardView.model">(core.views.PublisherDashboardView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherListView.model">(core.views.PublisherListView attribute)</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     module
 
@@ -837,9 +950,11 @@
         <li><a href="core.html#module-core.views">core.views</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.views.MyFeedView">MyFeedView (class in core.views)</a>
+</li>
       <li><a href="core.html#core.api_views.MyPersonalizedFeedView">MyPersonalizedFeedView (class in core.api_views)</a>
+</li>
+      <li><a href="core.html#core.views.MySubscriptionsView">MySubscriptionsView (class in core.views)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -863,9 +978,17 @@
 </li>
       <li><a href="core.html#core.models.Newsletter.MultipleObjectsReturned">Newsletter.MultipleObjectsReturned</a>
 </li>
+      <li><a href="core.html#core.models.Newsletter.NotUpdated">Newsletter.NotUpdated</a>
+</li>
+      <li><a href="core.html#core.views.newsletter_create">newsletter_create() (in module core.views)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="core.html#core.models.Newsletter.NotUpdated">Newsletter.NotUpdated</a>
+      <li><a href="core.html#core.views.newsletter_publish">newsletter_publish() (in module core.views)</a>
+</li>
+      <li><a href="core.html#core.views.newsletter_update">newsletter_update() (in module core.views)</a>
+</li>
+      <li><a href="core.html#core.views.NewsletterDetailView">NewsletterDetailView (class in core.views)</a>
 </li>
       <li><a href="core.html#core.forms.NewsletterForm">NewsletterForm (class in core.forms)</a>
 </li>
@@ -931,6 +1054,8 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.views.ArticleListView.paginate_by">paginate_by (core.views.ArticleListView attribute)</a>
+</li>
       <li><a href="core.html#core.api_views.PublicJournalistArticlesView.pagination_class">pagination_class (core.api_views.PublicJournalistArticlesView attribute)</a>
 
       <ul>
@@ -963,7 +1088,13 @@
         <li><a href="core.html#core.api_views.SubscribedArticlesFeed.permission_classes">(core.api_views.SubscribedArticlesFeed attribute)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.views.SubscribePublisherView.post">post() (core.views.SubscribePublisherView method)</a>
+</li>
+      <li><a href="core.html#core.views.post_to_x">post_to_x() (in module core.views)</a>
+</li>
       <li><a href="core.html#core.models.CustomUser.profile_picture">profile_picture (core.models.CustomUser attribute)</a>
+</li>
+      <li><a href="core.html#core.views.ProfileView">ProfileView (class in core.views)</a>
 </li>
       <li><a href="core.html#core.api_views.PublicJournalistArticles">PublicJournalistArticles (class in core.api_views)</a>
 </li>
@@ -995,6 +1126,8 @@
 </li>
       <li><a href="core.html#core.models.Publisher.NotUpdated">Publisher.NotUpdated</a>
 </li>
+      <li><a href="core.html#core.views.publisher_articles">publisher_articles() (in module core.views)</a>
+</li>
       <li><a href="core.html#core.models.Article.publisher_id">publisher_id (core.models.Article attribute)</a>
 
       <ul>
@@ -1004,6 +1137,10 @@
       <li><a href="core.html#core.api_views.PublisherArticlesPublic">PublisherArticlesPublic (class in core.api_views)</a>
 </li>
       <li><a href="core.html#core.api_views.PublisherArticlesView">PublisherArticlesView (class in core.api_views)</a>
+</li>
+      <li><a href="core.html#core.views.PublisherDashboardView">PublisherDashboardView (class in core.views)</a>
+</li>
+      <li><a href="core.html#core.views.PublisherListView">PublisherListView (class in core.views)</a>
 </li>
       <li><a href="core.html#core.serializers.PublisherSerializer">PublisherSerializer (class in core.serializers)</a>
 </li>
@@ -1021,9 +1158,13 @@
         <li><a href="core.html#core.serializers.ArticlePublicSerializer.Meta.read_only_fields">(core.serializers.ArticlePublicSerializer.Meta attribute)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.views.ReaderDashboardView">ReaderDashboardView (class in core.views)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.apps.CoreConfig.ready">ready() (core.apps.CoreConfig method)</a>
+</li>
+      <li><a href="core.html#core.views.CustomLoginView.redirect_authenticated_user">redirect_authenticated_user (core.views.CustomLoginView attribute)</a>
 </li>
       <li><a href="core.html#core.forms.SignUpForm.ROLE_CHOICES">ROLE_CHOICES (core.forms.SignUpForm attribute)</a>
 </li>
@@ -1041,6 +1182,8 @@
         <li><a href="core.html#core.models.Article.save">(core.models.Article method)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.views.send_notifications_to_subscribers">send_notifications_to_subscribers() (in module core.views)</a>
+</li>
       <li><a href="core.html#core.api_views.ArticleDetailView.serializer_class">serializer_class (core.api_views.ArticleDetailView attribute)</a>
 
       <ul>
@@ -1065,13 +1208,15 @@
         <li><a href="core.html#core.api_views.SubscribedArticlesFeed.serializer_class">(core.api_views.SubscribedArticlesFeed attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.tests.SubscribedArticlesFeedAPITest.setUp">setUp() (core.tests.SubscribedArticlesFeedAPITest method)</a>
 </li>
       <li><a href="core.html#core.forms.SignUpForm">SignUpForm (class in core.forms)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.forms.SignUpForm.Meta">SignUpForm.Meta (class in core.forms)</a>
+</li>
+      <li><a href="core.html#core.views.SignUpView">SignUpView (class in core.views)</a>
 </li>
       <li><a href="core.html#core.models.Article.slug">slug (core.models.Article attribute)</a>
 
@@ -1081,6 +1226,10 @@
         <li><a href="core.html#core.models.Newsletter.slug">(core.models.Newsletter attribute)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.views.JournalistProfileView.slug_field">slug_field (core.views.JournalistProfileView attribute)</a>
+</li>
+      <li><a href="core.html#core.views.JournalistProfileView.slug_url_kwarg">slug_url_kwarg (core.views.JournalistProfileView attribute)</a>
+</li>
       <li><a href="core.html#core.models.Article.status">status (core.models.Article attribute)</a>
 
       <ul>
@@ -1099,11 +1248,47 @@
 </li>
       <li><a href="core.html#core.tests.SubscribedArticlesFeedAPITest">SubscribedArticlesFeedAPITest (class in core.tests)</a>
 </li>
+      <li><a href="core.html#core.views.SubscribePublisherView">SubscribePublisherView (class in core.views)</a>
+</li>
+      <li><a href="core.html#core.views.SignUpView.success_url">success_url (core.views.SignUpView attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.views.ArticleDetailView.template_name">template_name (core.views.ArticleDetailView attribute)</a>
+
+      <ul>
+        <li><a href="core.html#core.views.ArticleListView.template_name">(core.views.ArticleListView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.CustomLoginView.template_name">(core.views.CustomLoginView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.HomeView.template_name">(core.views.HomeView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.JournalistDashboardView.template_name">(core.views.JournalistDashboardView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.JournalistProfileView.template_name">(core.views.JournalistProfileView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.MyFeedView.template_name">(core.views.MyFeedView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.MySubscriptionsView.template_name">(core.views.MySubscriptionsView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.NewsletterDetailView.template_name">(core.views.NewsletterDetailView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.ProfileView.template_name">(core.views.ProfileView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherDashboardView.template_name">(core.views.PublisherDashboardView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.PublisherListView.template_name">(core.views.PublisherListView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.ReaderDashboardView.template_name">(core.views.ReaderDashboardView attribute)</a>
+</li>
+        <li><a href="core.html#core.views.SignUpView.template_name">(core.views.SignUpView attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.tests.SubscribedArticlesFeedAPITest.test_authenticated_via_api_key_returns_expected_articles">test_authenticated_via_api_key_returns_expected_articles() (core.tests.SubscribedArticlesFeedAPITest method)</a>
 </li>
@@ -1113,8 +1298,6 @@
 </li>
       <li><a href="core.html#core.tests.SubscribedArticlesFeedAPITest.test_invalid_api_key_returns_401">test_invalid_api_key_returns_401() (core.tests.SubscribedArticlesFeedAPITest method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core.html#core.tests.SubscribedArticlesFeedAPITest.test_last_used_at_is_updated_on_successful_request">test_last_used_at_is_updated_on_successful_request() (core.tests.SubscribedArticlesFeedAPITest method)</a>
 </li>
       <li><a href="core.html#core.tests.SubscribedArticlesFeedAPITest.test_no_subscriptions_or_follows_returns_empty_list">test_no_subscriptions_or_follows_returns_empty_list() (core.tests.SubscribedArticlesFeedAPITest method)</a>
@@ -1131,12 +1314,14 @@
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="core.html#core.models.ApiClient.user">user (core.models.ApiClient attribute)</a>
+      <li><a href="core.html#core.views.unfollow_journalist">unfollow_journalist() (in module core.views)</a>
 </li>
-      <li><a href="core.html#core.models.ApiClient.user_id">user_id (core.models.ApiClient attribute)</a>
+      <li><a href="core.html#core.models.ApiClient.user">user (core.models.ApiClient attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.models.ApiClient.user_id">user_id (core.models.ApiClient attribute)</a>
+</li>
       <li><a href="core.html#core.models.CustomUser.user_permissions">user_permissions (core.models.CustomUser attribute)</a>
 </li>
       <li><a href="core.html#core.models.CustomUser.username">username (core.models.CustomUser attribute)</a>
@@ -1169,7 +1354,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2026, harrisdmac02-cloud.</p>
+    <p>&#169; Copyright .</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -10,20 +10,9 @@ def journalist_required(view_func):
     Decorator that restricts access to views to users who are journalists.
 
     This decorator:
-    - Requires the user to be logged in (combines with @login_required)
+    - Requires the user to be logged in
     - Checks if the user has the 'is_journalist' property set to True
     - Redirects non-journalists to the home page with an error message
-
-    Usage:
-        @journalist_required
-        def create_article(request):
-            ...
-
-    Args:
-        view_func: The view function to decorate.
-
-    Returns:
-        function: The wrapped view function.
     """
     @wraps(view_func)
     @login_required
@@ -43,17 +32,6 @@ def editor_required(view_func):
     - Requires the user to be logged in (combines with @login_required)
     - Checks if the user has the 'is_editor' property set to True
     - Redirects non-editors to the home page with an error message
-
-    Usage:
-        @editor_required
-        def approve_article(request, pk):
-            ...
-
-    Args:
-        view_func: The view function to decorate.
-
-    Returns:
-        function: The wrapped view function.
     """
     @wraps(view_func)
     @login_required
