@@ -1,5 +1,7 @@
-core
-====
+.. _modules:
+
+Project Modules
+===============
 
 .. toctree::
    :maxdepth: 4
