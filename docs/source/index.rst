@@ -1,17 +1,20 @@
 .. Django News Platform documentation master file, created by
-   sphinx-quickstart on Tue Feb 10 03:50:08 2026.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+   sphinx-quickstart on ...
 
-Django News Platform documentation
-==================================
+Welcome to Django News Platform's documentation!
+================================================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+This is the API and code documentation for the news platform.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   modules   # ← this line includes all the autodoc-generated .rst files
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
